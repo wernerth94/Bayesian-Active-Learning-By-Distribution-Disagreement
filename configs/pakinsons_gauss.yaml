@@ -1,0 +1,18 @@
+# Normal Classification
+dataset:
+  budget: 800
+  classifier_fitting_mode: finetuning
+  initial_points_per_class: 200
+  classifier_batch_size: 64
+  validation_split: 0.2
+
+classifier:
+  type: Gauss
+  dropout: 0.00779722660404198
+#  hidden: [16, 32, 48]
+  hidden: [32, 64, 128]
+
+optimizer:
+  type: NAdam
+  lr: 0.000749100320246554
+  weight_decay: 0.00085122632797778

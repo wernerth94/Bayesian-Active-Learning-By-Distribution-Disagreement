@@ -1,0 +1,63 @@
+# Normal Classification
+dataset:
+#  budget: 400
+  # Large Class. ablation
+  budget: 800
+  classifier_fitting_mode: finetuning
+  initial_points_per_class: 200
+  classifier_batch_size: 64
+  validation_split: 0.2
+
+classifier:
+#  type: Gauss
+#  hidden: 64
+  type: NSF
+  dropout: 0.0491574072268771
+#  hidden: [128, 256, 256]
+  hidden: [32, 64, 128]
+
+optimizer:
+  type: NAdam
+  lr: 0.000801996471673024
+  weight_decay: 0.000326110139620643
+
+# Embedded Classification
+dataset_embedded:
+  encoder_checkpoint: encoder_checkpoints/splice_31.03/model_seed1.pth.tar
+  budget: 60
+  classifier_fitting_mode: from_scratch
+  initial_points_per_class: 10
+  classifier_batch_size: 64
+
+classifier_embedded:
+  type: Linear
+#  type: MLP
+#  hidden: [12, 48]
+
+optimizer_embedded:
+  type: NAdam
+  lr: 0.000623159145739371
+  weight_decay: 5.93318060155352E-06
+
+# Pretext Task (SimCLR)
+pretext_encoder:
+  type: MLP
+  hidden: [64, 128]
+  feature_dim: 48
+
+pretext_optimizer:
+  type: NAdam
+  lr: 0.000454846257936763
+  weight_decay: 3.65248014822272E-07
+  lr_scheduler: cosine
+  lr_scheduler_decay: 0.154156762501498
+
+pretext_transforms:
+  gauss_scale: 0.171781355095294
+
+pretext_clr_loss:
+  temperature: 0.106187809603207
+
+pretext_training:
+  batch_size: 292
+  epochs: 200
